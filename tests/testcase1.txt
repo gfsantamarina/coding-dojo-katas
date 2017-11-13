@@ -1,0 +1,20 @@
+5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/5 (21 rolls: 10 pairs of 5 and spare, with a final 5) = 10 frames * 15 points = 150
+5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/5
+9- 9- 9- 9- 9- 9- 9- 9- 9- 9- (20 rolls: 10 pairs of 9 and miss) = 10 frames * 9 points = 90
+X X X X X X X X X X X X (12 rolls: 12 strikes) = 10 frames * 30 points = 300
+X X X X X X X X X X X 9 (12 rolls: 11 strikes) = 10 frames * 30 points = 299
+X X X X X X X X X X X 5 (12 rolls: 11 strikes) = 10 frames * 30 points = 295
+1- 2- 3- 4- 5- 6- 7- 8- X X X X
+11 2- 3- 4- 5- 6- 7- 8- X X X X
+12 2- 3- 4- 5- 6- 7- 8- X X X X
+13 2- 3- 4- 5- 6- 7- 8- X X X X
+14 2- 3- 4- 5- 6- 7- 8- X X X X
+15 2- 3- 4- 5- 6- 7- 8- X X X X
+16 2- 3- 4- 5- 6- 7- 8- X X X X
+17 2- 3- 4- 5- 6- 7- 8- X X X X
+18 2- 3- 4- 5- 6- 7- 8- X X X X
+1/ 2- 3- 4- 5- 6- 7- 8- X X X X
+5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/6 = 151
+5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/6
+5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5- = 140
+5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5-
