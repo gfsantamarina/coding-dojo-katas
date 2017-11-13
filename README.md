@@ -1,5 +1,5 @@
 # coding-dojo-katas
 Katas for my Coding Dojo work
 
-First Kata - http://codingdojo.org/kata/Bowling/
+First Kata - http://codingdojo.org/kata/Bowling/<br>
 I used the Bowling Score Calculator (http://www.bowlinggenius.com/) to verify my sample data.
