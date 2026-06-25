@@ -54,8 +54,8 @@ public class Frame {
 	}
 
 	public int getSecondBallForScore() {
-		if (isStrike)
-			return !isLastFrame() ? getNextFrame().getFirstBall() : getThirdBall();
+		if (isStrike && !isLastFrame())
+			return getNextFrame().getFirstBall();
 		else
 			return pinsKnocked[1];
 	}
