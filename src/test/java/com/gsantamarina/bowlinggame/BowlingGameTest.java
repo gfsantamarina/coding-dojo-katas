@@ -33,6 +33,18 @@ public class BowlingGameTest {
     }
 
     @Test
+    void lastFrameStrikeThenTwoNumericBalls() {
+        // 10th-frame strike with numeric bonus balls 4 and 5: 10 + 4 + 5 = 19
+        assertEquals(19, score("0- 0- 0- 0- 0- 0- 0- 0- 0- X 4 5"));
+    }
+
+    @Test
+    void lastFrameStrikeThenSpareOnBonusBalls() {
+        // 10th-frame strike with bonus balls 5 then spare: 10 + 5 + 5 = 20
+        assertEquals(20, score("0- 0- 0- 0- 0- 0- 0- 0- 0- X 5 /"));
+    }
+
+    @Test
     void spareEveryFrameWithFive() {
         assertEquals(150, score("5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/5"));
     }

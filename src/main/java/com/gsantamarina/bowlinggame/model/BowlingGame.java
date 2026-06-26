@@ -63,13 +63,19 @@ public class BowlingGame {
 			aFrame.setStrike(true);
 			aFrame.setSecondBall(10);
 		}
+		else if (Character.isDigit(secondBall.charAt(0))) {
+			aFrame.setSecondBall(Character.getNumericValue(secondBall.charAt(0)));
+		}
 
 		if (thirdBall.charAt(0)=='X') {
 			aFrame.setStrike(true);
 			aFrame.setThirdBall(10);
 		}
-		
-		if (Character.isDigit(thirdBall.charAt(0))) {
+		else if (thirdBall.charAt(0)=='/') {
+			// Spare on the bonus balls: the third ball completes 10 with the second.
+			aFrame.setThirdBall(10-aFrame.getSecondBall());
+		}
+		else if (Character.isDigit(thirdBall.charAt(0))) {
 			aFrame.setThirdBall(Character.getNumericValue(thirdBall.charAt(0)));
 		}
 		return aFrame;
