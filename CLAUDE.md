@@ -98,8 +98,16 @@ The following are excluded from version control:
 
 ## Known Bug History
 
-**Fixed:** `Frame.getSecondBallForScore()` previously returned the wrong bonus ball when the 9th frame was a strike and the 10th frame also opened with a strike. The fix changed `if (isStrike)` to `if (isStrike && !isLastFrame())`. Do not revert this change.
+All of the following are fixed. Do not revert these changes.
+
+- **Strike bonus ball:** `Frame.getSecondBallForScore()` returned the wrong bonus ball when the 9th frame was a strike and the 10th frame also opened with a strike. Fixed by changing `if (isStrike)` to `if (isStrike && !isLastFrame())`.
+- **Open last frame parser:** `BowlingGame.parseFramesFromLine()` crashed with `ArrayIndexOutOfBoundsException` on an open two-digit last frame (e.g. `"11"`). Fixed by treating only a strike-opening last frame as needing extra bonus-ball tokens.
+- **Last-frame strike bonus balls:** `BowlingGame.newFrameFromFrameTokens()` did not handle numeric or spare bonus balls after a 10th-frame strike. Fixed by adding numeric and `/` (spare) handling for the bonus balls.
+
+## Error Handling
+
+`BowlingGameScorer` prints a friendly usage message when no file argument is given, and human-readable error messages (not stack traces) when the input file is missing or unreadable.
 
 ## Test Coverage
 
-`BowlingGameTest.java` covers all 20 lines of `testcase1.txt` (17 test cases — some lines are duplicate game strings). Tests include a `@ParameterizedTest` for the two-digit frame description cases (lines 8–15).
+`BowlingGameTest.java` has 25 test cases. These cover all unique game strings in `testcase1.txt` plus fundamental kata cases (gutter game, all ones, single spare, single strike) and edge cases (turkey, spare-then-strike, last-frame strike bonus balls). Tests include a `@ParameterizedTest` for the two-digit frame description cases.
