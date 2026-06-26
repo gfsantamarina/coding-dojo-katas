@@ -2,6 +2,8 @@ package com.gsantamarina.bowlinggame;
 
 import com.gsantamarina.bowlinggame.model.BowlingGame;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BowlingGameTest {
@@ -53,5 +55,20 @@ public class BowlingGameTest {
     @Test
     void openingSpareFollowedByMixes() {
         assertEquals(107, score("1/ 2- 3- 4- 5- 6- 7- 8- X X X X"));
+    }
+
+    @ParameterizedTest(name = "first frame \"{0}\" scores {1}")
+    @CsvSource({
+        "'11 2- 3- 4- 5- 6- 7- 8- X X X X', 97",
+        "'12 2- 3- 4- 5- 6- 7- 8- X X X X', 98",
+        "'13 2- 3- 4- 5- 6- 7- 8- X X X X', 99",
+        "'14 2- 3- 4- 5- 6- 7- 8- X X X X', 100",
+        "'15 2- 3- 4- 5- 6- 7- 8- X X X X', 101",
+        "'16 2- 3- 4- 5- 6- 7- 8- X X X X', 102",
+        "'17 2- 3- 4- 5- 6- 7- 8- X X X X', 103",
+        "'18 2- 3- 4- 5- 6- 7- 8- X X X X', 104"
+    })
+    void twoDigitFirstFrameWithStrikesAtEnd(String game, int expected) {
+        assertEquals(expected, score(game));
     }
 }
