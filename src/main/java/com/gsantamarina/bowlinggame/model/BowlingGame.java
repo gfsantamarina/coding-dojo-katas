@@ -63,13 +63,19 @@ public class BowlingGame {
 			aFrame.setStrike(true);
 			aFrame.setSecondBall(10);
 		}
+		else if (Character.isDigit(secondBall.charAt(0))) {
+			aFrame.setSecondBall(Character.getNumericValue(secondBall.charAt(0)));
+		}
 
 		if (thirdBall.charAt(0)=='X') {
 			aFrame.setStrike(true);
 			aFrame.setThirdBall(10);
 		}
-		
-		if (Character.isDigit(thirdBall.charAt(0))) {
+		else if (thirdBall.charAt(0)=='/') {
+			// Spare on the bonus balls: the third ball completes 10 with the second.
+			aFrame.setThirdBall(10-aFrame.getSecondBall());
+		}
+		else if (Character.isDigit(thirdBall.charAt(0))) {
 			aFrame.setThirdBall(Character.getNumericValue(thirdBall.charAt(0)));
 		}
 		return aFrame;
@@ -83,12 +89,13 @@ public class BowlingGame {
 		for (int i=0; i<=9; i++) {
 			if (i<9)
 				aFrame = newFrameFromFrameToken(i, tokens[i]);
-			else if (i==9) // Handle the special case of the last frame and balls - weird
-				if (tokens[9].length()==3 && (tokens[9].charAt(1)=='/') ||
-					tokens[9].length()==2 && (tokens[9].charAt(1)=='-')	)
-						aFrame = newFrameFromFrameToken(i, tokens[i]);
-				else
-					aFrame = newFrameFromFrameTokens(i, tokens[i], tokens[i+1], tokens[i+2]);
+            else if (i==9) // Last frame is special: a strike opening means up to 3 bonus balls
+                // Only a strike-opening last frame needs extra tokens (the bonus balls).
+                // Open frames and spares are fully described by the single token.
+                if (tokens[9].charAt(0) != 'X')
+                    aFrame = newFrameFromFrameToken(i, tokens[i]);
+                else
+                    aFrame = newFrameFromFrameTokens(i, tokens[i], tokens[i+1], tokens[i+2]);
 			frames.add(aFrame);
 		}
 	}
