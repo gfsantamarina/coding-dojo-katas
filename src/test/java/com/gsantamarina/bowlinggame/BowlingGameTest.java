@@ -13,6 +13,26 @@ public class BowlingGameTest {
     }
 
     @Test
+    void gutterGame() {
+        assertEquals(0, score("0- 0- 0- 0- 0- 0- 0- 0- 0- 0-"));
+    }
+
+    @Test
+    void allOnes() {
+        assertEquals(20, score("11 11 11 11 11 11 11 11 11 11"));
+    }
+
+    @Test
+    void oneSpareRestGutter() {
+        assertEquals(10, score("5/ 0- 0- 0- 0- 0- 0- 0- 0- 0-"));
+    }
+
+    @Test
+    void oneStrikeRestGutter() {
+        assertEquals(10, score("X 0- 0- 0- 0- 0- 0- 0- 0- 0-"));
+    }
+
+    @Test
     void spareEveryFrameWithFive() {
         assertEquals(150, score("5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/5"));
     }
