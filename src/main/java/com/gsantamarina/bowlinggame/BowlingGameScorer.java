@@ -28,19 +28,18 @@ public class BowlingGameScorer {
 	}
 
 	public static void main(String[] args) {
-	
-		if (args.length!=1) {
-			System.out.println("help: bowlinggame inputframesfile");
-		} else {
-			try {
-				scoreGameFile(new BufferedReader(new InputStreamReader(new FileInputStream(args[0]))));
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+
+		if (args.length != 1) {
+			System.err.println("Usage: bowlinggame <inputframesfile>");
+			return;
+		}
+
+		try {
+			scoreGameFile(new BufferedReader(new InputStreamReader(new FileInputStream(args[0]))));
+		} catch (FileNotFoundException e) {
+			System.err.println("Error: could not find input file '" + args[0] + "'");
+		} catch (IOException e) {
+			System.err.println("Error: could not read input file '" + args[0] + "': " + e.getMessage());
 		}
 	}
 }

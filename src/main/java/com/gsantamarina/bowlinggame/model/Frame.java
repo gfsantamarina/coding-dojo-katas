@@ -21,14 +21,20 @@ public class Frame {
 		return frameNumber;
 	}
 
+	// Dead code: currently unused. The frame number is set via the constructor.
+	// Kept in case frames ever need to be renumbered after creation.
 	public void setFrameNumber(int frameNumber) {
 		this.frameNumber = frameNumber;
 	}
 
+	// Dead code: currently unused. Kept for potential future access to the raw
+	// per-ball pin counts (e.g. for reporting or alternative scoring).
 	public int[] getPinsKnocked() {
 		return pinsKnocked;
 	}
 
+	// Dead code: currently unused. Kept in case pins need to be set in bulk
+	// rather than one ball at a time.
 	public void setPinsKnocked(int[] pinsKnocked) {
 		this.pinsKnocked = pinsKnocked;
 	}
