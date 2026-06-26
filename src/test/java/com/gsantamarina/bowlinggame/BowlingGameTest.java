@@ -45,6 +45,18 @@ public class BowlingGameTest {
     }
 
     @Test
+    void threeStrikesThenGutters() {
+        // Turkey at the start: 30 + 20 + 10, rest gutters = 60
+        assertEquals(60, score("X X X 0- 0- 0- 0- 0- 0- 0-"));
+    }
+
+    @Test
+    void spareThenStrikeRestGutters() {
+        // Spare (5/) bonus is the next ball (the strike's 10): 20 + 10 = 30
+        assertEquals(30, score("5/ X 0- 0- 0- 0- 0- 0- 0- 0-"));
+    }
+
+    @Test
     void spareEveryFrameWithFive() {
         assertEquals(150, score("5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/5"));
     }
