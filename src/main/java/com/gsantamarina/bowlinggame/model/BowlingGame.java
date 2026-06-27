@@ -15,89 +15,44 @@ public class BowlingGame {
 			frames.get(i).setNextFrame(frames.get(i+1));
 	}
 	
-	private Frame newFrameFromFrameToken(int frameNumber, String frameDesc ) {
-		
+	private int parseBall(char c, int previousPins) {
+		if (c == 'X') return 10;
+		if (c == '/') return 10 - previousPins;
+		if (c == '-') return 0;
+		return Character.getNumericValue(c);
+	}
+
+	private Frame parseFrame(int frameNumber, String[] tokens) {
 		Frame aFrame = new Frame(frameNumber);
-		
-		if (frameDesc.charAt(0)=='X') {
+		String token = tokens[frameNumber];
+
+		int first = parseBall(token.charAt(0), 0);
+		aFrame.setFirstBall(first);
+
+		if (first == 10) {
 			aFrame.setStrike(true);
-			aFrame.setFirstBall(10);
+			if (aFrame.isLastFrame()) {
+				int second = parseBall(tokens[10].charAt(0), 0);
+				aFrame.setSecondBall(second);
+				aFrame.setThirdBall(parseBall(tokens[11].charAt(0), second));
+			}
 			return aFrame;
 		}
-		if (Character.isDigit(frameDesc.charAt(0))) {
-			aFrame.setFirstBall(Character.getNumericValue(frameDesc.charAt(0)));
-		}
-		if (frameDesc.length()>1) {
-			if (Character.isDigit(frameDesc.charAt(1))) {
-				aFrame.setSecondBall(Character.getNumericValue(frameDesc.charAt(1)));
-			}
-			if (frameDesc.charAt(1)=='/') {
-				aFrame.setSecondBall(10-aFrame.getFirstBall());
-				aFrame.setSpare(true);
-			}
-			if (frameDesc.charAt(1)=='-') {
-				aFrame.setSecondBall(0);
-				return aFrame;
-			}
-		}
-		
-		// Must have been a spare in the last frame
-		if (aFrame.isLastFrame() && frameDesc.length()==3) {
-			if (Character.isDigit(frameDesc.charAt(2))) {
-				aFrame.setThirdBall(Character.getNumericValue(frameDesc.charAt(2)));
-			}
-		}
+
+		int second = parseBall(token.charAt(1), first);
+		aFrame.setSecondBall(second);
+		if (token.charAt(1) == '/') aFrame.setSpare(true);
+
+		if (aFrame.isLastFrame() && token.length() == 3)
+			aFrame.setThirdBall(parseBall(token.charAt(2), second));
 
 		return aFrame;
 	}
-	
-	private Frame newFrameFromFrameTokens(int frameNumber, String firstBall, String secondBall, String thirdBall) {
-		Frame aFrame = newFrameFromFrameToken(frameNumber, firstBall);
-			
-		if (firstBall.charAt(0)=='X') {
-			aFrame.setStrike(true);
-			aFrame.setFirstBall(10);
-		}
 
-		if (secondBall.charAt(0)=='X') {
-			aFrame.setStrike(true);
-			aFrame.setSecondBall(10);
-		}
-		else if (Character.isDigit(secondBall.charAt(0))) {
-			aFrame.setSecondBall(Character.getNumericValue(secondBall.charAt(0)));
-		}
-
-		if (thirdBall.charAt(0)=='X') {
-			aFrame.setStrike(true);
-			aFrame.setThirdBall(10);
-		}
-		else if (thirdBall.charAt(0)=='/') {
-			// Spare on the bonus balls: the third ball completes 10 with the second.
-			aFrame.setThirdBall(10-aFrame.getSecondBall());
-		}
-		else if (Character.isDigit(thirdBall.charAt(0))) {
-			aFrame.setThirdBall(Character.getNumericValue(thirdBall.charAt(0)));
-		}
-		return aFrame;
-	}
-	
-	private void parseFramesFromLine(String aGameLine)
-	{
-		String tokens[] = aGameLine.split(" ", 13);
-		Frame aFrame=null;
-		
-		for (int i=0; i<=9; i++) {
-			if (i<9)
-				aFrame = newFrameFromFrameToken(i, tokens[i]);
-            else if (i==9) // Last frame is special: a strike opening means up to 3 bonus balls
-                // Only a strike-opening last frame needs extra tokens (the bonus balls).
-                // Open frames and spares are fully described by the single token.
-                if (tokens[9].charAt(0) != 'X')
-                    aFrame = newFrameFromFrameToken(i, tokens[i]);
-                else
-                    aFrame = newFrameFromFrameTokens(i, tokens[i], tokens[i+1], tokens[i+2]);
-			frames.add(aFrame);
-		}
+	private void parseFramesFromLine(String aGameLine) {
+		String[] tokens = aGameLine.split(" ", 13);
+		for (int i = 0; i <= 9; i++)
+			frames.add(parseFrame(i, tokens));
 	}
 		
 	public int score() {
