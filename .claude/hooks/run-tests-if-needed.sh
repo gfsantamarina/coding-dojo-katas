@@ -36,8 +36,8 @@ OUTPUT=$(java -jar /tmp/junit-standalone.jar \
   --class-path target/classes:target/test-classes \
   --scan-class-path 2>&1)
 
-PASSED=$(echo "$OUTPUT" | grep -oP '\[\K[0-9]+(?= tests successful\])')
-FAILED=$(echo "$OUTPUT" | grep -oP '\[\K[0-9]+(?= tests failed\])')
+PASSED=$(echo "$OUTPUT" | grep 'tests successful' | sed 's/[^0-9]*\([0-9]*\).*/\1/')
+FAILED=$(echo "$OUTPUT" | grep 'tests failed' | sed 's/[^0-9]*\([0-9]*\).*/\1/')
 
 FAILED=${FAILED:-0}
 
